@@ -11,7 +11,6 @@ public class MessagePopUp extends VisualObject {
     int timeLeft;
     boolean blockInput;
     Color textColor;
-    MessagePopUp afterwards;
 
     public MessagePopUp(int y, int height, String text, int timeLeft, boolean blockInput, Color textColor) {
         super(0, y, 800, height);

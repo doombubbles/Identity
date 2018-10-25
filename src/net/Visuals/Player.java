@@ -8,7 +8,7 @@ import java.awt.*;
 public class Player extends VisualObject {
 
     public static int speed = 10;
-    public Color color = Color.BLUE;
+    public Color color = new Color(28, 75, 193);
 
     public Player(int x, int y, int width, int height) {
         super(x, y, width, height);
@@ -19,8 +19,15 @@ public class Player extends VisualObject {
     public void draw(Graphics g) {
         super.draw(g);
         if (Main.playerIsVisible) {
-            g.setColor(new Color(28, 75, 193));
-            g.fillOval(x - (width / 2), y - (height / 2), width, height);
+            g.setColor(color);
+
+            Polygon triangle = new Polygon(new int[]{x - 15, x + 15, x},
+                                            new int[]{y + 5, y + 5, y - 25}, 3);
+            g.fillPolygon(triangle);
+            g.fillOval(x - 15, y - 5, 30, 30);
+
+
+
             g.setColor(Color.BLACK);
         }
     }

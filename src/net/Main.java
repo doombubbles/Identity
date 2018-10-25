@@ -62,7 +62,7 @@ public class Main {
         Timer timer = new Timer("MyTimer");
         timer.scheduleAtFixedRate(timerTask, 0, 50);
 
-        player = new Player(400, 450, 20, 20);
+        player = new Player(400, 450, 30, 50);
         environment.add(player);
         playerIsVisible = true;
         playerCanMove = false;

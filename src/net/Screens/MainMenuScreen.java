@@ -10,17 +10,17 @@ public class MainMenuScreen extends Screen {
 
     BackgroundImage backgroundImage;
     VisualLabel loadingLabel;
-    VisualObjectGroup backgroundImage2 = new VisualObjectGroup();
+    BackgroundImage backgroundImage2;
 
     @Override
     public void init() {
-        backgroundImage = new BackgroundImage("Map_Background_Ocean.png", 800, 600);
+        backgroundImage = new BackgroundImage("img/Map_Background_Ocean.png", 800, 600);
         background.add(backgroundImage);
 
         loadingLabel = new VisualLabel("Loading...", 280, 200, 50, Color.WHITE);
         foreground.add(loadingLabel);
 
-        backgroundImage2.add(new SolidRectangle(400, 1000, 800, 650, new Color(100,70,0)));
+        backgroundImage2 = new BackgroundImage("img/room1.png", 800, 600);
     }
 
     @Override
@@ -31,21 +31,31 @@ public class MainMenuScreen extends Screen {
 
         if (Main.time > 100 && Main.time < 140) {
             backgroundImage.y -= (Main.time - 100);
-            if (Main.time < 120) {
+            if (Main.time < 118) {
                 Main.player.y -= (Main.time - 100);
             }
         }
 
         if (Main.time == 140) {
-            backgroundImage2.addTo(background);
+            background.add(backgroundImage2);
+            backgroundImage2.y = 1000;
         }
-        if (Main.time > 140 && Main.time < 163) {
-            backgroundImage2.changePos(0, -1 * (Main.time - 120));
+
+        if (Main.time > 140 && Main.time <= 170) {
+            if (backgroundImage2.y > 0) {
+                backgroundImage2.y -= Main.time - 120;
+            } else {
+                backgroundImage2.y = 0;
+            }
         }
 
         if (Main.time == 170) {
+            Main.playerCanMove = true;
             foreground.add(new MessagePopUp(450,75, "What happens when a drop is separated from a lake?", 60, false, Color.WHITE));
-
+            Main.environment.add(new Boundary(0, 0, 25, 267));
+            Main.environment.add(new Boundary(26, 0, 748, 102));
         }
+
+
     }
 }
