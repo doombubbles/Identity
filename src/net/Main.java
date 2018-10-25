@@ -17,6 +17,7 @@ public class Main {
     public static List<VisualObject> environment;
     public static int tick = 0;
     public static int time = 0;
+    public static boolean doTick = true;
 
     public static MainFrame mainFrame;
     public static Screen screenToSwitchTo = null;
@@ -31,6 +32,9 @@ public class Main {
     public static boolean playerCanMove;
     public static boolean playerIsVisible;
 
+
+    public static int checkpoint = 0;
+
     public static void main(String[] args) {
         mainFrame = new MainFrame();
         switchScreen(new MainMenuScreen());
@@ -38,24 +42,26 @@ public class Main {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                tick++;
-                time++;
+                if (doTick) {
+                    tick++;
+                    time++;
 
-                if (screenToSwitchTo != null) {
-                    if (mainFrame.currentScreen != null) {
-                        mainFrame.remove(mainFrame.currentScreen);
+                    if (screenToSwitchTo != null) {
+                        if (mainFrame.currentScreen != null) {
+                            mainFrame.remove(mainFrame.currentScreen);
+                        }
+                        mainFrame.currentScreen = screenToSwitchTo;
+                        mainFrame.add(mainFrame.currentScreen);
+                        mainFrame.currentScreen.init();
+                        screenToSwitchTo = null;
                     }
-                    mainFrame.currentScreen = screenToSwitchTo;
-                    mainFrame.add(mainFrame.currentScreen);
-                    mainFrame.currentScreen.init();
-                    screenToSwitchTo = null;
-                }
 
-                runBehaviors();
-                mainFrame.revalidate();
-                mainFrame.repaint();
-                if (tick == 20) {
-                    tick = 0;
+                    runBehaviors();
+                    mainFrame.revalidate();
+                    mainFrame.repaint();
+                    if (tick == 20) {
+                        tick = 0;
+                    }
                 }
             }
         };

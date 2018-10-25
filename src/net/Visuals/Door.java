@@ -15,7 +15,7 @@ public class Door extends VisualObject {
     boolean clearEnvironment;
 
     public Door(int x, int y, int width, int height, Screen screen, int newX, int newY, boolean clearEnvironment) {
-        super(x, y, width, height);
+        super(x + width / 2, y + height / 2, width, height);
         this.screen = screen;
         this.newX = newX;
         this.newY = newY;
@@ -26,7 +26,6 @@ public class Door extends VisualObject {
     @Override
     public void draw(Graphics g) {
         super.draw(g);
-        g.fillOval(x-1, y-1, 2, 2);
     }
 
     @Override
