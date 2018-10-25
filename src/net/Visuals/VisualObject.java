@@ -1,3 +1,5 @@
+package net.Visuals;
+
 import java.awt.*;
 
 public class VisualObject {
@@ -6,6 +8,8 @@ public class VisualObject {
     public int y;
     public int width;
     public int height;
+    public boolean destroyed;
+    public boolean solid;
 
     public VisualObject(int x, int y, int width, int height) {
         this.x = x;
@@ -19,7 +23,7 @@ public class VisualObject {
 
     }
 
-    public void ai() {
+    public void behavior() {
 
     }
 }

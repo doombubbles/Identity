@@ -1,5 +1,8 @@
+package net;
+
+import net.Screens.Screen;
+
 import javax.swing.*;
-import java.awt.*;
 
 public class MainFrame extends JFrame {
 
@@ -12,8 +15,6 @@ public class MainFrame extends JFrame {
         setResizable(false);
         this.setLocationRelativeTo(null);
         //seticonimage
-        currentScreen = new MainMenuScreen();
-        add(currentScreen);
         setVisible(true);
         setFocusable(true);
         addKeyListener(Main.keyListener());
@@ -22,11 +23,5 @@ public class MainFrame extends JFrame {
     @Override
     public void revalidate() {
         super.revalidate();
-        for (VisualObject visualObject : currentScreen.background) {
-            visualObject.ai();
-        }
-        for (VisualObject visualObject : Main.environment) {
-            visualObject.ai();
-        }
     }
 }

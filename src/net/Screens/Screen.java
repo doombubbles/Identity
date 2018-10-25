@@ -1,3 +1,9 @@
+package net.Screens;
+
+
+import net.*;
+import net.Visuals.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -7,9 +13,13 @@ public class Screen extends JPanel {
 
     public List<VisualObject> background;
 
+    public List<VisualObject> foreground;
+
     public Screen() {
         setVisible(true);
         background = new ArrayList<>();
+
+        foreground = new ArrayList<>();
     }
 
     @Override
@@ -21,5 +31,16 @@ public class Screen extends JPanel {
         for (VisualObject visualObject : Main.environment) {
             visualObject.draw(g);
         }
+        for (VisualObject visualObject : foreground) {
+            visualObject.draw(g);
+        }
+    }
+
+    public void behavior() {
+
+    }
+
+    public void init() {
+
     }
 }

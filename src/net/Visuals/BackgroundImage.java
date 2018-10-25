@@ -1,3 +1,6 @@
+package net.Visuals;
+
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,11 +11,13 @@ public class BackgroundImage extends VisualObject {
     public BackgroundImage(String s) {
         super(0, 0, 0, 0);
         this.image = new ImageIcon(s).getImage();
+        solid = false;
     }
 
     public BackgroundImage(String s, int width, int height) {
         super(0, 0, width, height);
         this.image = new ImageIcon(s).getImage();
+        solid = false;
     }
 
     @Override
