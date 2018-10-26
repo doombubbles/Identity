@@ -35,6 +35,8 @@ public class Main {
 
 
     public static int checkpoint = 0;
+    public static int decision1 = -1;
+    public static int decision2 = -1;
 
     public static Color tardisBlue = new Color(28, 75, 193);
 

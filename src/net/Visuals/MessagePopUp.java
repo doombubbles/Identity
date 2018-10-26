@@ -41,13 +41,10 @@ public class MessagePopUp extends VisualObject {
         if (blockInput) {
             Main.playerCanMove = false;
         }
-        if (timeLeft == 0 || Main.spacePressed) {
+        if (timeLeft == 0) {
             destroyed = true;
             if (blockInput) {
                 Main.playerCanMove = true;
-            }
-            if (Main.spacePressed) {
-                Main.spacePressed = false;
             }
         }
     }

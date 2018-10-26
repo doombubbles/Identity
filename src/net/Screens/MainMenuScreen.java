@@ -53,7 +53,7 @@ public class MainMenuScreen extends Screen {
         }
 
         if (Main.time == 170) {
-            foreground.add(new MessagePopUp(450,75, "What happens when a drop is separated from the lake?", 60, false, Color.WHITE));
+            foreground.add(new MessagePopUp(450,50, "What happens when a drop is separated from the Lake?", 60, false, Color.WHITE));
             Main.environment.add(new Boundary(0, 0, 25, 267));
             Main.environment.add(new Boundary(26, 0, 748, 102));
             Main.environment.add(new Boundary(774, 0, 20, 572));
@@ -81,7 +81,7 @@ public class MainMenuScreen extends Screen {
         if (Main.time == 495) {
             npc.plotCourse(-500, 0);
             Main.playerCanMove = true;
-            foreground.add(new MessagePopUp(0, 50, "Wait!", 40, false, Main.player.color));
+            //foreground.add(new MessagePopUp(0, 50, "Wait!", 40, false, Main.player.color));
         }
 
         if (Main.time == 570) {

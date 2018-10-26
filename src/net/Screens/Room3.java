@@ -1,10 +1,7 @@
 package net.Screens;
 
 import net.Main;
-import net.Visuals.BackgroundImage;
-import net.Visuals.Boundary;
-import net.Visuals.MessagePopUp;
-import net.Visuals.NPC;
+import net.Visuals.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,9 +11,14 @@ public class Room3 extends Screen {
     boolean open;
     boolean inColorRange;
     int startTime;
+    boolean hasChangedColor;
 
     NPC npc;
     NPC npc2;
+
+    Boundary boundary1;
+    Boundary boundary2;
+    Boundary boundary3;
 
     @Override
     public void init() {
@@ -35,9 +37,20 @@ public class Room3 extends Screen {
 
         Main.environment.add(new Boundary(0, 0, 25, 267));
 
+        if (Main.checkpoint < 6) {
+            npc = new NPC(400, 300, 30, 50, Color.RED);
+            Main.environment.add(npc);
 
-        npc = new NPC(400, 300, 30, 50, Color.RED);
-        Main.environment.add(npc);
+        }
+
+        Main.environment.add(new NPC(150, 450, 30, 50, Color.magenta));
+        hasChangedColor = false;
+
+        if (Main.checkpoint >= 4) {
+            Main.environment.add(new Door(0, 266, 26, 78, new Room6(), 750, 300, true));
+            Main.environment.add(new Door(356, 497, 83, 76, new Room5(), 400, 150, true));
+            Main.environment.add(new Door(774, 267, 21, 77, new Room2(), 50, 300, true));
+        }
 
     }
 
@@ -48,6 +61,13 @@ public class Room3 extends Screen {
                 npc2 = new NPC(100, 100, 30, 50, Main.tardisBlue);
                 Main.environment.add(npc2);
                 Main.playerCanMove = false;
+
+                boundary1 = new Boundary(0, 266, 26, 78);
+                Main.environment.add(boundary1);
+                boundary2 = new Boundary(356, 497, 83, 76);
+                Main.environment.add(boundary2);
+                boundary3 = new Boundary(774, 267, 21, 77);
+                Main.environment.add(boundary3);
             }
 
             if (Main.time % 4 == 0) {
@@ -103,11 +123,67 @@ public class Room3 extends Screen {
             }
 
             if (Main.time == startTime + 540) {
-                foreground.add(new MessagePopUp(0, 50, "", 60, false, Color.RED));
+                foreground.add(new MessagePopUp(0, 50, "...", 40, false, Color.RED));
             }
+
+            if (Main.time == startTime + 585) {
+                foreground.add(new MessagePopUp(0, 50, "I'm sorry you had to be there to see that.", 60, false, Color.RED));
+            }
+
+            if (Main.time == startTime + 650) {
+                foreground.add(new MessagePopUp(0, 50, "Not everyone can handle living like this.", 60, false, Color.RED));
+                npc.plotCourse(0, 150);
+            }
+            if (Main.time == startTime + 665) {
+                npc.plotCourse(300, 0);
+            }
+            if (Main.time == startTime + 715) {
+                foreground.add(new MessagePopUp(0, 50, "It can help if you choose a color for yourself like we have.", 50, false, Color.RED));
+            }
+            if (Main.time == startTime + 770) {
+                foreground.add(new MessagePopUp(0, 50, "Would you like to?", 60, false, Color.RED));
+            }
+            if (Main.time == startTime + 800) {
+                Main.doTick = false;
+                Main.decision1 = JOptionPane.showConfirmDialog(null, "Would you like to choose your own color for yourself?", "Choose your path", JOptionPane.YES_NO_OPTION);
+                Main.doTick = true;
+                Main.playerCanMove = true;
+                if (Main.decision1 == JOptionPane.YES_OPTION) {
+                    foreground.add(new MessagePopUp(0, 50, "Good. Just walk over to the fountain whenever you're ready.", 100, false, Color.RED));
+
+                } else {
+                    foreground.add(new MessagePopUp(0, 50, "That's your call then.", 100, false, Color.RED));
+                }
+            }
+
+            if (Main.time == startTime + 900 && Main.decision1 == JOptionPane.NO_OPTION) {
+                Main.checkpoint = 3;
+            }
+
+            if (hasChangedColor && Main.checkpoint == 2) {
+                Main.checkpoint = 3;
+            }
+        }
+
+        if (Main.checkpoint == 3) {
+            foreground.add(new MessagePopUp(0, 50, "You can go to the room below and rest, or explore around.", 180, false, Color.RED));
+            foreground.add(new MessagePopUp(0, 50, "Well. I know this must be a lot to take in.", 90, false, Color.RED));
+            Main.checkpoint = 4;
+
+            boundary1.destroyed = true;
+            boundary2.destroyed = true;
+            boundary3.destroyed = true;
+
+            Main.environment.add(new Door(0, 266, 26, 78, new Room6(), 750, 300, true));
+            Main.environment.add(new Door(356, 497, 83, 76, new Room5(), 400, 150, true));
+            Main.environment.add(new Door(774, 267, 21, 77, new Room2(), 50, 300, true));
 
         }
 
+
+        if (Main.checkpoint == 6) {
+            foreground.add(new MessagePopUp(0, 50, "Freeing this next guy completely broke the machine.", 2, false, new Color(127, 55 , 0)));
+        }
 
 
 
@@ -121,7 +197,7 @@ public class Room3 extends Screen {
             open = false;
         }
 
-        if (inColorRange && !open) {
+        if (inColorRange && !open && Main.decision1 != JOptionPane.NO_OPTION) {
             open = true;
             Main.playerCanMove = false;
             Main.doTick = false;
@@ -130,6 +206,7 @@ public class Room3 extends Screen {
             Main.playerCanMove = true;
             Main.player.x = 400;
             Main.player.y = 200;
+            hasChangedColor = true;
         }
 
     }
