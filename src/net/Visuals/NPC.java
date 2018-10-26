@@ -9,9 +9,11 @@ public class NPC extends VisualObject {
     public int dy;
     public int speed = 10;
 
+
     public NPC(int x, int y, int width, int height, Color color) {
         super(x, y, width, height);
         this.color = color;
+        solid = true;
     }
 
     @Override
@@ -19,7 +21,7 @@ public class NPC extends VisualObject {
         g.setColor(color);
 
         Polygon triangle = new Polygon(new int[]{x - 15, x + 15, x},
-                new int[]{y + 5, y + 5, y - 25}, 3);
+                new int[]{y + 7, y + 7, y - 25}, 3);
         g.fillPolygon(triangle);
         g.fillOval(x - 15, y - 5, 30, 30);
 
@@ -28,7 +30,7 @@ public class NPC extends VisualObject {
         g.setColor(Color.BLACK);
     }
 
-    public void addMovementRoute(int dx, int dy) {
+    public void plotCourse(int dx, int dy) {
         this.dx += dx;
         this.dy += dy;
     }

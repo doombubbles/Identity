@@ -63,7 +63,7 @@ public class MainMenuScreen extends Screen {
 
             npc = new NPC(-700, 300, 30, 50, Color.RED);
             Main.environment.add(npc);
-            npc.addMovementRoute(950, 0);
+            npc.plotCourse(950, 0);
         }
 
         if (Main.time == 280) {
@@ -79,7 +79,7 @@ public class MainMenuScreen extends Screen {
         }
 
         if (Main.time == 495) {
-            npc.addMovementRoute(-500, 0);
+            npc.plotCourse(-500, 0);
             Main.playerCanMove = true;
             foreground.add(new MessagePopUp(0, 50, "Wait!", 40, false, Main.player.color));
         }

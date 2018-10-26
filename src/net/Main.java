@@ -5,6 +5,7 @@ import net.Screens.Screen;
 import net.Visuals.Player;
 import net.Visuals.VisualObject;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -34,6 +35,8 @@ public class Main {
 
 
     public static int checkpoint = 0;
+
+    public static Color tardisBlue = new Color(28, 75, 193);
 
     public static void main(String[] args) {
         mainFrame = new MainFrame();

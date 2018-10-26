@@ -15,7 +15,7 @@ public class Room2 extends Screen {
         if (Main.checkpoint == 0) {
             NPC npc = new NPC(550, 300, 30, 50, Color.red);
             Main.environment.add(npc);
-            npc.addMovementRoute(-1000, 0);
+            npc.plotCourse(-1000, 0);
             Main.checkpoint = 1;
         }
         background.add(new BackgroundImage("img/room2.png", 800, 600));
